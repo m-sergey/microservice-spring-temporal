@@ -1,10 +1,21 @@
 plugins {
-    id 'org.springframework.boot' version '2.6.3'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '3.5.6'
+    id 'io.spring.dependency-management' version '1.1.7'
     id 'java'
 }
 
 version = '0.0.1-SNAPSHOT'
+
+
+apply plugin: 'org.springframework.boot'
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -13,20 +24,40 @@ repositories {
 }
 
 compileJava {
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = 17
+    targetCompatibility = 17
 }
 
 ext {
-    mapstructVersion = "1.4.1.Final"
-    lombokVersion = "1.18.20"
+    mapstructVersion = "1.6.3"
+    lombokVersion = "1.18.42"
+    temporalVersion = "1.31.0"
+    openAPIVersion = "2.8.5"
 }
 
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+}
 
 dependencies {
+//    dependencies {
+//        errorproneJavac('com.google.errorprone:javac:9+181-r4173-1')
+//        if (JavaVersion.current().isJava11Compatible()) {
+//            errorprone('com.google.errorprone:error_prone_core:2.28.0')
+//        } else {
+//            errorprone('com.google.errorprone:error_prone_core:2.28.0')
+//        }
+//    }
+
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openAPIVersion}"
 
+    implementation "io.temporal:temporal-spring-boot-starter:${temporalVersion}"
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"
     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
@@ -34,6 +65,7 @@ dependencies {
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
+    runtimeOnly "io.micrometer:micrometer-registry-prometheus"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.rest-assured:spring-mock-mvc'

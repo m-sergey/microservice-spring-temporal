@@ -1,0 +1,28 @@
+server:
+  port: 3030
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: temporal-samples
+
+  management:
+    endpoints:
+      beans:
+        enabled: true
+      web:
+        exposure:
+          include: beans
+
+  # temporal specific configs
+  temporal:
+    namespace: default
+    connection:
+      target: 127.0.0.1:7233
+    workersAutoDiscovery:
+      packages: me.mamre
+
+samples:
+  data:
+    language: english

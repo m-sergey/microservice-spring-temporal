@@ -1,0 +1,23 @@
+{
+  "id": "sampleFlow2",
+  "name": "Sample Flow One",
+  "workflow": "DslWorkflow2",
+  "description": "Sample Flow Definition",
+  "actions": [
+    {
+      "action": "One",
+      "retries": 10,
+      "startToCloseSec": 3
+    },
+    {
+      "action": "Two",
+      "retries": 8,
+      "startToCloseSec": 3
+    },
+    {
+      "action": "Three",
+      "retries": 10,
+      "startToCloseSec": 4
+    }
+  ]
+}
