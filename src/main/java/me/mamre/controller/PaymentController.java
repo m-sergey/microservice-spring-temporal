@@ -26,7 +26,7 @@ public class PaymentController {
             value = "/payment",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    ResponseEntity<String> runPayment(@RequestBody Payment payment) {
+    ResponseEntity<String> runPayment(@RequestBody Payment payment) throws ClassNotFoundException {
         var result = service.runFlow(payment);
         return new ResponseEntity<>("\"" + result + "\"", HttpStatus.OK);
     }

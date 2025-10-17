@@ -1,4 +1,6 @@
 package me.mamre.workflow.dsl;
 
-public class DslWorkflowImpl extends DslWorkflowBaseImpl implements DslWorkflow {
+import me.mamre.model.Flow;
+
+public class DslWorkflowImpl extends BaseDslWorkflowImpl implements DslWorkflow {
 }

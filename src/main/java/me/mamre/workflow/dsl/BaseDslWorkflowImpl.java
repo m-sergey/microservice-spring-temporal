@@ -13,7 +13,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DslWorkflowBaseImpl implements DslWorkflow {
+public class BaseDslWorkflowImpl {
     public String run(Flow flow, String input) {
         if (flow == null || flow.getActions().isEmpty()) {
             throw ApplicationFailure.newFailure(

@@ -1,6 +1,7 @@
 package me.mamre.service;
 
 import me.mamre.model.Payment;
+import me.mamre.workflow.dsl.DslWorkflowImpl;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.temporal.client.WorkflowClient;
@@ -12,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import me.mamre.model.Flow;
 import me.mamre.workflow.dsl.DslActivitiesImpl;
 import me.mamre.workflow.dsl.DslWorkflow;
-import me.mamre.workflow.dsl.DslWorkflowBaseImpl;
 
 import java.io.File;
 import java.net.URL;
@@ -34,14 +34,14 @@ public class DslWorkflowService {
         log.info("Created DslWorkflowService");
     }
 
-    public String runFlow(Payment payment) {
+    public String runFlow(Payment payment) throws ClassNotFoundException {
         Flow flow = paymentWorkflows.get(payment.getSystem());
 
         WorkflowServiceStubs service = WorkflowServiceStubs.newLocalServiceStubs();
         WorkflowClient client = WorkflowClient.newInstance(service);
         WorkerFactory factory = WorkerFactory.newInstance(client);
         Worker worker = factory.newWorker("dsl-task-queue");
-        worker.registerWorkflowImplementationTypes(DslWorkflowBaseImpl.class);
+        worker.registerWorkflowImplementationTypes(DslWorkflowImpl.class);
         worker.registerActivitiesImplementations(new DslActivitiesImpl());
         factory.start();
 
