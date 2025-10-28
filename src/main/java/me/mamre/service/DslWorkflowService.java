@@ -53,7 +53,7 @@ public class DslWorkflowService {
                                 .setTaskQueue("dsl-task-queue")
                                 .build());
 
-        String result = workflow.run(flow, "sample input");
+        String result = workflow.run(flow, payment);
 
         return result;
     }

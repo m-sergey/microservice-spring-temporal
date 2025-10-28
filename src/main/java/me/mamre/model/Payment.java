@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Map;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -12,5 +14,5 @@ import lombok.Setter;
 public class Payment {
     private String system;
     private String workflow;
-    private Integer amount;
+    private Map<String, Object> params;
 }

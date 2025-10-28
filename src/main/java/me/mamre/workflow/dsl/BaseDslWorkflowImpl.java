@@ -8,13 +8,14 @@ import io.temporal.workflow.ActivityStub;
 import io.temporal.workflow.Workflow;
 import me.mamre.model.Flow;
 import me.mamre.model.FlowAction;
+import me.mamre.model.Payment;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BaseDslWorkflowImpl {
-    public String run(Flow flow, String input) {
+    public String run(Flow flow, Payment input) {
         if (flow == null || flow.getActions().isEmpty()) {
             throw ApplicationFailure.newFailure(
                     "Flow is null or does not have any actions", "illegal flow");
@@ -28,7 +29,7 @@ public class BaseDslWorkflowImpl {
         }
     }
 
-    private String runActions(Flow flow, String input) {
+    private String runActions(Flow flow, Payment input) {
         List<String> results = new ArrayList<>();
         for (FlowAction action : flow.getActions()) {
             // build activity options based on flow action input
