@@ -11,6 +11,7 @@ services:
       - 5432:5432
     volumes:
       - /var/lib/postgresql/data
+      - ./config/postgresql/init-scripts:/docker-entrypoint-initdb.d
   temporal:
     container_name: temporal
     depends_on:
@@ -30,7 +31,7 @@ services:
     ports:
       - 7233:7233
     volumes:
-      - ./config:/etc/temporal/config/dynamicconfig
+      - ./config/temporal:/etc/temporal/config/dynamicconfig
   temporal-admin-tools:
     container_name: temporal-admin-tools
     depends_on:
@@ -44,17 +45,29 @@ services:
     stdin_open: true
     tty: true
   temporal-ui:
+    image: temporalio/ui:${TEMPORAL_UI_VERSION}
     container_name: temporal-ui
     depends_on:
       - temporal
     environment:
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000
-    image: temporalio/ui:${TEMPORAL_UI_VERSION}
     networks:
       - temporal-network
     ports:
       - 8080:8080
+  mockserver:
+    image: mockserver/mockserver:latest
+    environment:
+      MOCKSERVER_PROPERTY_FILE: /config/mockserver.properties
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/spec.json
+      MOCKSERVER_WATCH_INITIALIZATION_JSON: "true" # Enable hot-reloading of spec.json
+    volumes:
+      - ./config/mockserver:/config # Mount the local config directory into the container
+    networks:
+      - temporal-network
+    ports:
+      - 1080:1080
 networks:
   temporal-network:
     driver: bridge

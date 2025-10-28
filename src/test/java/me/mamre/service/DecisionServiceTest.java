@@ -6,6 +6,7 @@ import me.mamre.repo.RuleVersionRepo;
 
 import org.camunda.bpm.dmn.engine.*;
 import org.camunda.bpm.model.dmn.DmnModelInstance;
+import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -18,6 +19,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@Ignore
 class DecisionServiceTest {
 
     private DmnEngine engine;

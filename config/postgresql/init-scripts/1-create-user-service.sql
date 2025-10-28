@@ -1,0 +1,3 @@
+CREATE USER payment WITH PASSWORD 'service' SUPERUSER;
+GRANT ALL ON DATABASE postgres TO payment;
+GRANT ALL ON SCHEMA public TO payment;
