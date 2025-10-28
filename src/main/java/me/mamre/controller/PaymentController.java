@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/payment")
 public class PaymentController {
 
     private final DslWorkflowService service;
@@ -17,13 +17,12 @@ public class PaymentController {
         this.service = service;
     }
 
-    @GetMapping("/payment")
+    @GetMapping
     public String hello() {
         return "TBD";
     }
 
     @PostMapping(
-            value = "/payment",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     ResponseEntity<String> runPayment(@RequestBody Payment payment) throws ClassNotFoundException {

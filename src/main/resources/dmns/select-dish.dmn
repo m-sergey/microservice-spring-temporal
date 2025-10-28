@@ -6,7 +6,7 @@
   <decision id="dish" name="Select Dish">
     <decisionTable hitPolicy="FIRST">
       <input id="i1"><inputExpression typeRef="string"><text>season</text></inputExpression></input>
-      <input id="i2"><inputExpression typeRef="number"><text>guestCount</text></inputExpression></input>
+      <input id="i2"><inputExpression typeRef="integer"><text>guestCount</text></inputExpression></input>
       <output id="o1" name="desiredDish" typeRef="string"/>
       <rule><inputEntry><text>"Spring"</text></inputEntry><inputEntry><text>&lt;= 8</text></inputEntry><outputEntry><text>"Salad"</text></outputEntry></rule>
       <rule><inputEntry><text>"Spring"</text></inputEntry><inputEntry><text>&gt; 8</text></inputEntry><outputEntry><text>"Stew"</text></outputEntry></rule>

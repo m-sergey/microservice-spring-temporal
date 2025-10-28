@@ -36,7 +36,7 @@ class DecisionServiceTest {
     @Test
     void upload_shouldValidateAndStoreDecision() throws Exception {
         // given
-        InputStream dmnStream = getClass().getResourceAsStream("/dmns/select-dish.dmn");
+        InputStream dmnStream = getClass().getResourceAsStream("/dmns/test-select-dish.dmn");
         assertNotNull(dmnStream, "DMN test file not found in resources");
 
         DmnDecision decision = mock(DmnDecision.class);

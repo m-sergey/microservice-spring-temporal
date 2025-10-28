@@ -25,7 +25,8 @@ public class HelloController {
     }
 
     @GetMapping("/hello")
-    public String hello(Model model) {
+    public String get(Model model) {
+        log.info("HelloController.get");
         return "hello";
     }
 
@@ -33,7 +34,7 @@ public class HelloController {
             value = "/hello",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.TEXT_HTML_VALUE})
-    ResponseEntity<String> helloSample(@RequestBody Person person) {
+    ResponseEntity<String> post(@RequestBody Person person) {
         HelloWorkflow workflow =
                 client.newWorkflowStub(
                         HelloWorkflow.class,

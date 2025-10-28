@@ -8,6 +8,19 @@ http://localhost:8080/
 
 http://localhost:3030/swagger-ui/index.html
 
+### Run flow
+
+```json
+{
+  "system": "sampleFlow",
+  "workflow": "sampleFlow",
+  "params": {
+    "amount": 100,
+    "usser_id": 999
+  }
+}
+```
+
 ### Mockserver UI
 
 http://localhost:1080/mockserver/dashboard
