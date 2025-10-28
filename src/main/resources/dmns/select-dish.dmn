@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/"
+             id="definitions" name="Select Dish" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="dish" name="Select Dish">
+    <decisionTable hitPolicy="FIRST">
+      <input id="i1"><inputExpression typeRef="string"><text>season</text></inputExpression></input>
+      <input id="i2"><inputExpression typeRef="number"><text>guestCount</text></inputExpression></input>
+      <output id="o1" name="desiredDish" typeRef="string"/>
+      <rule><inputEntry><text>"Spring"</text></inputEntry><inputEntry><text>&lt;= 8</text></inputEntry><outputEntry><text>"Salad"</text></outputEntry></rule>
+      <rule><inputEntry><text>"Spring"</text></inputEntry><inputEntry><text>&gt; 8</text></inputEntry><outputEntry><text>"Stew"</text></outputEntry></rule>
+      <rule><inputEntry><text>"Summer"</text></inputEntry><inputEntry><text>&lt;= 8</text></inputEntry><outputEntry><text>"Light salad"</text></outputEntry></rule>
+      <rule><inputEntry><text>"Summer"</text></inputEntry><inputEntry><text>&gt; 8</text></inputEntry><outputEntry><text>"BBQ"</text></outputEntry></rule>
+    </decisionTable>
+  </decision>
+</definitions>
