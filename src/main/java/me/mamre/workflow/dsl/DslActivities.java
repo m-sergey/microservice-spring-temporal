@@ -1,6 +1,7 @@
 package me.mamre.workflow.dsl;
 
 import io.temporal.activity.ActivityInterface;
+import me.mamre.model.Payment;
 
 @ActivityInterface
 public interface DslActivities {
@@ -10,5 +11,5 @@ public interface DslActivities {
 
     String three();
 
-    String four();
+    String four(Payment payment);
 }

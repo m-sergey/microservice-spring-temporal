@@ -28,9 +28,11 @@ public class DslWorkflowService {
     public static final WorkerFactory factory = WorkerFactory.newInstance(client);
 
     private final Map<String, Flow> paymentWorkflows;
+    private final DecisionService decisionService;
 
-    public DslWorkflowService() {
+    public DslWorkflowService(DecisionService decisionService) {
         this.paymentWorkflows = getFlowFromResource();
+        this.decisionService = decisionService;
         log.info("Created DslWorkflowService");
     }
 
@@ -42,7 +44,7 @@ public class DslWorkflowService {
         WorkerFactory factory = WorkerFactory.newInstance(client);
         Worker worker = factory.newWorker("dsl-task-queue");
         worker.registerWorkflowImplementationTypes(DslWorkflowImpl.class);
-        worker.registerActivitiesImplementations(new DslActivitiesImpl());
+        worker.registerActivitiesImplementations(new DslActivitiesImpl(decisionService));
         factory.start();
 
         DslWorkflow workflow =

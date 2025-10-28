@@ -1,8 +1,21 @@
 package me.mamre.workflow.dsl;
 
+import com.google.gson.Gson;
+import lombok.extern.slf4j.Slf4j;
+import me.mamre.model.Payment;
+import me.mamre.service.DecisionService;
+
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class DslActivitiesImpl implements DslActivities {
+
+    private final DecisionService decisionService;
+
+    public DslActivitiesImpl(DecisionService decisionService) {
+        this.decisionService = decisionService;
+    }
+
     @Override
     public String one() {
         sleep(1);
@@ -22,9 +35,13 @@ public class DslActivitiesImpl implements DslActivities {
     }
 
     @Override
-    public String four() {
-        sleep(1);
-        return "Activity four done...";
+    public String four(Payment payment) {
+        //decisionService.evaluate("validation-sampleFlow", 1, null);
+        var result = decisionService.evaluate("sampleFlow_validation", 1, payment.getParams());
+        var json = new Gson().toJson(result.get("result"));
+        log.info("four: " + json);
+
+        return json;
     }
 
     private void sleep(int seconds) {

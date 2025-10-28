@@ -70,11 +70,9 @@ public class RuleController {
         log.info("rulesInit");
         try {
             Gson gson = new Gson();
-            URL file = DslWorkflowService.class.getClassLoader().getResource("dmns/select-dish.dmn");
+            URL file = DslWorkflowService.class.getClassLoader().getResource("dmns/validation-sampleFlow.dmn");
 
-//            InputStream input = RuleController.class.getClass().getResourceAsStream("/dmns/select-dish.dmn");
-//            log.info(String.valueOf(input.available()));
-            var added = service.upload(Files.newInputStream(Path.of(file.getPath())), Optional.empty());
+            var added = service.upload(Files.newInputStream(Path.of(file.getPath())), Optional.of("sampleFlow_validation"));
             List<RuleMetadataDto> dtos = new ArrayList<>();
             for (var m : added) {
                 var dto = new RuleMetadataDto();
