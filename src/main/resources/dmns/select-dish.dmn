@@ -1,17 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
-             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
-             xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/"
-             id="definitions" name="Select Dish" namespace="http://camunda.org/schema/1.0/dmn">
-  <decision id="dish" name="Select Dish">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="select-dish" name="Select Dish" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <decision id="dish" name="Select Dish" camunda:versionTag="1">
     <decisionTable hitPolicy="FIRST">
-      <input id="i1"><inputExpression typeRef="string"><text>season</text></inputExpression></input>
-      <input id="i2"><inputExpression typeRef="integer"><text>guestCount</text></inputExpression></input>
-      <output id="o1" name="desiredDish" typeRef="string"/>
-      <rule><inputEntry><text>"Spring"</text></inputEntry><inputEntry><text>&lt;= 8</text></inputEntry><outputEntry><text>"Salad"</text></outputEntry></rule>
-      <rule><inputEntry><text>"Spring"</text></inputEntry><inputEntry><text>&gt; 8</text></inputEntry><outputEntry><text>"Stew"</text></outputEntry></rule>
-      <rule><inputEntry><text>"Summer"</text></inputEntry><inputEntry><text>&lt;= 8</text></inputEntry><outputEntry><text>"Light salad"</text></outputEntry></rule>
-      <rule><inputEntry><text>"Summer"</text></inputEntry><inputEntry><text>&gt; 8</text></inputEntry><outputEntry><text>"BBQ"</text></outputEntry></rule>
+      <input id="i1">
+        <inputExpression typeRef="string">
+          <text>season</text>
+        </inputExpression>
+      </input>
+      <input id="i2">
+        <inputExpression typeRef="integer">
+          <text>guestCount</text>
+        </inputExpression>
+      </input>
+      <output id="o1" name="desiredDish" typeRef="string" />
+      <rule id="Spring_less_8">
+        <inputEntry>
+          <text>"Spring"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&lt;= 8</text>
+        </inputEntry>
+        <outputEntry>
+          <text>"Salad"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Spring_more_8">
+        <inputEntry>
+          <text>"Spring"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&gt; 8</text>
+        </inputEntry>
+        <outputEntry>
+          <text>"Stew"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Summer_less_8">
+        <inputEntry>
+          <text>"Summer"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&lt;= 8</text>
+        </inputEntry>
+        <outputEntry>
+          <text>"Light salad"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Summer_more_8">
+        <inputEntry>
+          <text>"Summer"</text>
+        </inputEntry>
+        <inputEntry>
+          <text>&gt; 8</text>
+        </inputEntry>
+        <outputEntry>
+          <text>"BBQ"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1tmm4gx">
+        <inputEntry id="UnaryTests_0qjjk74">
+          <text>"Winter"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08v6p87">
+          <text>&lt;= 8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1eexdqx">
+          <text>"Hot tea"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1mir16g">
+      <dmndi:DMNShape id="DMNShape_0n3kd7b" dmnElementRef="dish">
+        <dc:Bounds height="80" width="180" x="150" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>

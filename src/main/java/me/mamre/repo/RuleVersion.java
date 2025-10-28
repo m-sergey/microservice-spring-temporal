@@ -1,6 +1,8 @@
 package me.mamre.repo;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+
 import java.time.Instant;
 
 @Entity
@@ -14,7 +16,10 @@ public class RuleVersion {
     @Column(nullable=false) private Integer version;
     @Column(nullable=false, length=64) private String sha256;
 
-    @Lob @Column(nullable=false) private byte[] xml;
+    @Lob
+    @Column(nullable=false, columnDefinition = "BYTEA")
+    @JdbcTypeCode(java.sql.Types.BINARY)
+    private byte[] xml;
 
     @Column(nullable=false) private Boolean enabled = true;
     @Column(name="uploaded_at", nullable=false) private Instant uploadedAt = Instant.now();
