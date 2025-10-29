@@ -36,7 +36,6 @@ public class DslActivitiesImpl implements DslActivities {
 
     @Override
     public String four(Payment payment) {
-        //decisionService.evaluate("validation-sampleFlow", 1, null);
         var result = decisionService.evaluate("sampleFlow_validation", 1, payment.getParams());
         var json = new Gson().toJson(result.get("result"));
         log.info("four: " + json);

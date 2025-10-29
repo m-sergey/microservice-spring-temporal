@@ -6,3 +6,5 @@ build
 
 # IDEA Projects
 .idea
+
+.DS_Store

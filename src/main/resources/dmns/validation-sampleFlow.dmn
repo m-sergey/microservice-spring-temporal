@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="sampleFlow-validation" name="sampleFlow-validation" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="sampleFlow-validation" name="sampleFlow-validation" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
   <decision id="sampleFlow_validation" name="sampleFlow-validation">
     <decisionTable hitPolicy="FIRST">
       <input id="Input_1" label="user_id">
-        <inputExpression id="InputExpression_1" typeRef="string">
-          <text></text>
+        <inputExpression id="InputExpression_1" typeRef="integer">
+          <text>user_id</text>
         </inputExpression>
       </input>
-      <input id="InputClause_1mfs4za" label="amount">
-        <inputExpression id="LiteralExpression_0t265v3" typeRef="string">
-          <text></text>
+      <input id="InputClause_1mfs4za" label="amount" biodi:width="192">
+        <inputExpression id="LiteralExpression_0t265v3" typeRef="integer">
+          <text>amount</text>
         </inputExpression>
       </input>
-      <output id="Output_1" typeRef="string" />
+      <input id="InputClause_0b9kdxo">
+        <inputExpression id="LiteralExpression_0v7x3gr" typeRef="integer">
+          <text>amount</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="result" typeRef="string" />
       <rule id="DecisionRule_033mvzr">
         <inputEntry id="UnaryTests_0u0wvqz">
-          <text>&gt;0</text>
+          <text>&gt; 0</text>
         </inputEntry>
         <inputEntry id="UnaryTests_11ulnf6">
           <text>&lt; 1000000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1lrvbbx">
+          <text>&gt; 0</text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0p024i4">
-          <text>OK</text>
+          <text>"OK"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0uip4z8">
@@ -31,28 +39,41 @@
         <inputEntry id="UnaryTests_17tkpsy">
           <text>&gt;= 1000000</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_0l14bbd">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0izm7fr">
-          <text>ERROR_LIMIT</text>
+          <text>"ERROR_LIMIT"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0dvwf1j">
         <inputEntry id="UnaryTests_1e7rbvi">
-          <text>&lt;=0</text>
+          <text>&lt;= 0</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0ueq9ia">
           <text>-</text>
         </inputEntry>
+        <inputEntry id="UnaryTests_1dkgy4f">
+          <text></text>
+        </inputEntry>
         <outputEntry id="LiteralExpression_0zagj8n">
-          <text>ERROR_USER_ID</text>
+          <text>"ERROR_USER_ID"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0s4dg0x">
+        <inputEntry id="UnaryTests_00si2zj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tk7tvx">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18euihb">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mch4u6">
+          <text>"ERROR"</text>
         </outputEntry>
       </rule>
     </decisionTable>
   </decision>
-  <dmndi:DMNDI>
-    <dmndi:DMNDiagram>
-      <dmndi:DMNShape dmnElementRef="Decision_0k6fzyg">
-        <dc:Bounds height="80" width="180" x="160" y="100" />
-      </dmndi:DMNShape>
-    </dmndi:DMNDiagram>
-  </dmndi:DMNDI>
 </definitions>

@@ -16,7 +16,7 @@ http://localhost:3030/swagger-ui/index.html
   "workflow": "sampleFlow",
   "params": {
     "amount": 100,
-    "usser_id": 999
+    "user_id": 999
   }
 }
 ```

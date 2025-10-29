@@ -104,7 +104,7 @@ public class DecisionService {
 
         List<Map<String, Object>> rows = result.getResultList().stream().map(r -> {
             Map<String, Object> m = new LinkedHashMap<>();
-            r.entrySet().forEach(e -> m.put(e.getKey(), e.getValue())); // ← исправлено
+            r.entrySet().forEach(e -> m.put(e.getKey(), e.getValue()));
             return m;
         }).collect(Collectors.toList());
 
