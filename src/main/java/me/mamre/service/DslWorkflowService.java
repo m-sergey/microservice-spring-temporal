@@ -1,5 +1,10 @@
 package me.mamre.service;
 
+import io.grpc.StatusRuntimeException;
+import io.temporal.api.common.v1.WorkflowExecution;
+import io.temporal.api.enums.v1.WorkflowIdConflictPolicy;
+import io.temporal.api.enums.v1.WorkflowIdReusePolicy;
+import io.temporal.api.workflowservice.v1.DescribeWorkflowExecutionRequest;
 import me.mamre.model.Payment;
 import me.mamre.workflow.dsl.DslWorkflowImpl;
 import org.springframework.stereotype.Service;
@@ -47,17 +52,39 @@ public class DslWorkflowService {
         worker.registerActivitiesImplementations(new DslActivitiesImpl(decisionService));
         factory.start();
 
+        String workflowId = Long.toString(payment.getId());
+        checkExistingWorkflowId(workflowId);
+
+        WorkflowOptions options = WorkflowOptions.newBuilder()
+                .setWorkflowId(workflowId)
+                .setWorkflowIdReusePolicy(WorkflowIdReusePolicy.WORKFLOW_ID_REUSE_POLICY_REJECT_DUPLICATE)
+                .setWorkflowIdConflictPolicy(WorkflowIdConflictPolicy.WORKFLOW_ID_CONFLICT_POLICY_FAIL)
+                .setTaskQueue("dsl-task-queue")
+                .build();
+
         DslWorkflow workflow =
-                client.newWorkflowStub(
-                        DslWorkflow.class,
-                        WorkflowOptions.newBuilder()
-                                .setWorkflowId(flow.getId())
-                                .setTaskQueue("dsl-task-queue")
-                                .build());
+                client.newWorkflowStub(DslWorkflow.class, options);
 
         String result = workflow.run(flow, payment);
 
         return result;
+    }
+
+    private void checkExistingWorkflowId (String workflowId) {
+        try {
+            WorkflowExecution execution = WorkflowExecution.newBuilder()
+                    .setWorkflowId(workflowId)
+                    .build();
+            client.getWorkflowServiceStubs()
+                    .blockingStub()
+                    .describeWorkflowExecution(DescribeWorkflowExecutionRequest.newBuilder()
+                            .setNamespace("default")
+                            .setExecution(execution)
+                            .build());
+            throw new RuntimeException("Workflow с ID " + workflowId + " уже существует!");
+        } catch (StatusRuntimeException e) {
+            return;
+        }
     }
 
     private Map<String, Flow> getFlowFromResource() {

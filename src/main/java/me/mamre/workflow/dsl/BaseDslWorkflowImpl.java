@@ -47,4 +47,13 @@ public class BaseDslWorkflowImpl {
         }
         return String.join(",", results);
     }
+
+    public String getProperty() {
+        return null;
+    }
+
+    public void sendSignal() {
+
+    }
+
 }

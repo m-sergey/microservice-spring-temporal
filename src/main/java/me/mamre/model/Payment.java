@@ -12,6 +12,7 @@ import java.util.Map;
 @Getter
 @Setter
 public class Payment {
+    private long id;
     private String system;
     private String workflow;
     private Map<String, Object> params;

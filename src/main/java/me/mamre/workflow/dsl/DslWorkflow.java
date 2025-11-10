@@ -1,5 +1,7 @@
 package me.mamre.workflow.dsl;
 
+import io.temporal.workflow.QueryMethod;
+import io.temporal.workflow.UpdateMethod;
 import io.temporal.workflow.WorkflowInterface;
 import io.temporal.workflow.WorkflowMethod;
 import me.mamre.model.Flow;
@@ -9,4 +11,10 @@ import me.mamre.model.Payment;
 public interface DslWorkflow {
     @WorkflowMethod
     String run(Flow flow, Payment input);
+
+    @QueryMethod
+    String getProperty();
+
+    @UpdateMethod
+    void sendSignal();
 }

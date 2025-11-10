@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,9 +71,10 @@ public class RuleController {
         log.info("rulesInit");
         try {
             Gson gson = new Gson();
-            URL file = DslWorkflowService.class.getClassLoader().getResource("dmns/validation-sampleFlow.dmn");
+            var uri = RuleController.class.getClassLoader().getResource("dmns/validation-sampleFlow.dmn").toURI();
+            String file = Paths.get(uri).toString();
 
-            var added = service.upload(Files.newInputStream(Path.of(file.getPath())), Optional.of("sampleFlow_validation"));
+            var added = service.upload(Files.newInputStream(Path.of(file)), Optional.of("sampleFlow_validation"));
             List<RuleMetadataDto> dtos = new ArrayList<>();
             for (var m : added) {
                 var dto = new RuleMetadataDto();
