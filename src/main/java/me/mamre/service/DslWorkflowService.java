@@ -53,7 +53,7 @@ public class DslWorkflowService {
         factory.start();
 
         String workflowId = Long.toString(payment.getId());
-        checkExistingWorkflowId(workflowId);
+//        checkExistingWorkflowId(workflowId);
 
         WorkflowOptions options = WorkflowOptions.newBuilder()
                 .setWorkflowId(workflowId)

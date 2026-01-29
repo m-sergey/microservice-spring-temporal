@@ -5,27 +5,27 @@
   "description": "Sample Flow Definition",
   "actions": [
     {
-      "action": "One",
+      "action": "request",
       "retries": 10,
       "startToCloseSec": 3
     },
     {
-      "action": "Two",
+      "action": "transform",
       "retries": 8,
       "startToCloseSec": 3
     },
     {
-      "action": "Three",
+      "action": "transform",
       "retries": 10,
       "startToCloseSec": 4
     },
     {
-      "action": "Four",
+      "action": "validate",
       "retries": 9,
       "startToCloseSec": 5
     },
     {
-      "action": "Four",
+      "action": "transform",
       "retries": 9,
       "startToCloseSec": 5
     }

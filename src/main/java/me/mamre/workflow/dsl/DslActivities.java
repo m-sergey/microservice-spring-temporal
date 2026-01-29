@@ -5,11 +5,11 @@ import me.mamre.model.Payment;
 
 @ActivityInterface
 public interface DslActivities {
-    String one();
+    String request(Payment payment);
 
-    String two();
+    String validate(Payment payment);
 
-    String three();
+    String transform(Payment payment);
 
-    String four(Payment payment);
+    String signal(Payment payment);
 }

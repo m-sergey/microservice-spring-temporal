@@ -35,6 +35,7 @@ ext {
     temporalVersion = "1.31.0"
     openAPIVersion = "2.8.5"
     postgresqlVersion = "42.7.4"
+    groovyVersion   = "5.0.4"
 }
 
 configurations {
@@ -57,6 +58,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-integration'
 
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-database-postgresql'
@@ -64,6 +66,8 @@ dependencies {
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openAPIVersion}"
 
     implementation "io.temporal:temporal-spring-boot-starter:${temporalVersion}"
+
+    implementation "org.apache.groovy:groovy:$groovyVersion"
 
     // Camunda DMN (standalone)
     implementation "org.camunda.bpm.dmn:camunda-engine-dmn:${camundaVersion}"

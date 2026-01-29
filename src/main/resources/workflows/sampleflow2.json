@@ -5,17 +5,17 @@
   "description": "Sample Flow Definition",
   "actions": [
     {
-      "action": "One",
+      "action": "makeRequest",
       "retries": 10,
       "startToCloseSec": 3
     },
     {
-      "action": "Two",
+      "action": "transform",
       "retries": 8,
       "startToCloseSec": 3
     },
     {
-      "action": "Three",
+      "action": "waitSignal",
       "retries": 10,
       "startToCloseSec": 4
     }

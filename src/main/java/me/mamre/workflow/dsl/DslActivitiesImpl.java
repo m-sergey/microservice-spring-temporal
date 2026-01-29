@@ -17,25 +17,25 @@ public class DslActivitiesImpl implements DslActivities {
     }
 
     @Override
-    public String one() {
+    public String request(Payment payment) {
         sleep(1);
-        return "Activity one done...";
+        return "Activity makeRequest done...";
     }
 
     @Override
-    public String two() {
+    public String transform(Payment payment) {
         sleep(1);
-        return "Activity two done...";
+        return "Activity transform done...";
     }
 
     @Override
-    public String three() {
+    public String signal(Payment payment) {
         sleep(1);
-        return "Activity three done...";
+        return "Activity waitSignal done...";
     }
 
     @Override
-    public String four(Payment payment) {
+    public String validate(Payment payment) {
         var result = decisionService.evaluate("sampleFlow_validation", 1, payment.getParams());
         var json = new Gson().toJson(result.get("result"));
         log.info("four: " + json);
