@@ -1,6 +1,6 @@
-package me.mamre.workflow.dsl;
+package me.mamre.workflow.activity;
 
-import io.temporal.activity.Activity;
+import me.mamre.model.Payment;
 import me.mamre.transformer.DbGroovyMessageTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.GenericMessage;
@@ -17,12 +17,15 @@ public class TransformActivityImpl implements TransformActivity {
     }
 
     @Override
-    public TransformResult transform(String scriptId, Object payload, Map<String, Object> headers) {
+    public TransformResult transform(Payment payment) {
+
+        String scriptId = payment.getParams().get("scriptId").toString();
+        Map<String, Object> headers = (Map<String, Object>) payment.getParams().get("headers");
 
         Map<String, Object> allHeaders = new HashMap<>(headers == null ? Map.of() : headers);
         allHeaders.put("scriptId", scriptId);
 
-        Message<Object> in = new GenericMessage<>(payload, allHeaders);
+        Message<Object> in = new GenericMessage<>(payment, allHeaders);
         Message<?> out = transformer.transform(in);
 
         // В Temporal лучше возвращать простые структуры (Map, POJO), а не Spring Message

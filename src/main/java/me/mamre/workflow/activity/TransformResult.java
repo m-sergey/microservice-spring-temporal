@@ -1,4 +1,4 @@
-package me.mamre.workflow.dsl;
+package me.mamre.workflow.activity;
 
 import java.util.Map;
 

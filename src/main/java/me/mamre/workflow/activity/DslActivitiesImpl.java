@@ -1,4 +1,4 @@
-package me.mamre.workflow.dsl;
+package me.mamre.workflow.activity;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;

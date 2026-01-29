@@ -1,13 +1,15 @@
-package me.mamre.workflow.dsl;
+package me.mamre.workflow.activity;
 
 import io.temporal.activity.ActivityInterface;
 import io.temporal.activity.ActivityMethod;
+import me.mamre.model.Payment;
 
 import java.util.Map;
 
 @ActivityInterface
 public interface TransformActivity {
+    
     @ActivityMethod
-    TransformResult transform(String scriptId, Object payload, Map<String, Object> headers);
+    TransformResult transform(Payment payment);
 }
 

@@ -1,6 +1,11 @@
 server:
   port: 3030
 
+app:
+  kafka:
+    topic: payments.events
+    dlq-topic: payments.events.dlq
+
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -19,6 +24,17 @@ spring:
       web:
         exposure:
           include: beans
+  kafka:
+    consumer:
+      group-id: kafka-to-temporal
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      properties:
+        # если нужно:
+        # isolation.level: read_committed
+        spring.json.trusted.packages: "*"
+    listener:
+      ack-mode: manual
 
   # temporal specific configs
   temporal:

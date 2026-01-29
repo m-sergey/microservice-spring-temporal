@@ -16,7 +16,7 @@ import io.temporal.worker.Worker;
 import io.temporal.worker.WorkerFactory;
 import lombok.extern.slf4j.Slf4j;
 import me.mamre.model.Flow;
-import me.mamre.workflow.dsl.DslActivitiesImpl;
+import me.mamre.workflow.activity.DslActivitiesImpl;
 import me.mamre.workflow.dsl.DslWorkflow;
 
 import java.io.File;

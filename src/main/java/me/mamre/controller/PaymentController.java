@@ -19,11 +19,6 @@ public class PaymentController {
         this.service = service;
     }
 
-    @GetMapping
-    public String hello() {
-        return "TBD";
-    }
-
     @PostMapping(
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})

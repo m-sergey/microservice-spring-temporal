@@ -1,8 +1,17 @@
 package me.mamre.model;
 
-public record ScriptDef(
-        String id,
-        long version,        // инкремент при каждом изменении
-        String code
-) {}
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+public class  ScriptDef{
+    String id;
+    long version;        // инкремент при каждом изменении
+    String code;
+}
 
